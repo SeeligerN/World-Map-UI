@@ -19,16 +19,19 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import ui.Map.Country;
+import ui.controlBar.ControlLabel;
 
 public class Window {
 
-	/**
-	 * 
-	 */
+	public static final int LEFT_LABEL  = 0;
+	public static final int CENTER_LABEL = 0;
+	public static final int RIGHT_LABEL = 0;
+	
 	private JFrame frame;
 
 	private ViewSettings view;
@@ -36,6 +39,7 @@ public class Window {
 	private List<ClickListener> clickListeners;
 
 	private DrawLabel dl;
+	private ControlLabel cl;
 
 	private Color bgColor = Color.WHITE;
 	private boolean doHover = true;
@@ -51,12 +55,27 @@ public class Window {
 
 		view.cx = Map.getWidth() / 2;
 		view.cy = Map.getHeight() / 2;
-		view.zoom = 1;
+		view.zoom = 1.2;
 
 		clickListeners = new ArrayList<>();
 
 		dl = new DrawLabel();
-		frame.add(dl);
+		dl.setMaximumSize(new Dimension(99999999, 9999999));
+		cl = new ControlLabel();
+		
+		GroupLayout gl = new GroupLayout(frame.getContentPane());
+		gl.setAutoCreateContainerGaps(true);
+		gl.setAutoCreateGaps(true);
+		
+		gl.setHorizontalGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addComponent(dl)
+				.addComponent(cl, GroupLayout.Alignment.CENTER));
+		
+		gl.setVerticalGroup(gl.createSequentialGroup()
+				.addComponent(dl)
+				.addComponent(cl));
+		
+		frame.setLayout(gl);
 		
 		PanMouse pm = new PanMouse();
 		dl.addMouseListener(pm);
@@ -67,7 +86,7 @@ public class Window {
 		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Map");
+		frame.setTitle("Risk");
 		frame.setVisible(true);
 	}
 
@@ -84,6 +103,16 @@ public class Window {
 	public void setTitle(String title) {
 		if (title != null)
 			frame.setTitle(title);
+	}
+	
+	public void setControlLabel(int labelLoc, JLabel label) {
+		cl.setLabel(labelLoc, label);
+	}
+	
+	public void setControlBarHeight(int height) {
+		if (height < 0)
+			height = 0;
+		cl.setHeight(height);
 	}
 
 	public void doHover(boolean dohover) {
