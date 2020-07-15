@@ -17,28 +17,26 @@ public class ControlLabel extends JLabel {
 	private JLabel leftLabel, centerLabel, rightLabel;
 	
 	public ControlLabel() {
-		setHeight(130);
+		setHeight(160);
 		
-		leftLabel = new StatusLabel();
+		leftLabel = new PlayerListLabel();
 		
-		centerLabel = new StatusLabel();
+		centerLabel = new AttackLabel();
 		
 		rightLabel = new StatusLabel();
 		
-		
 		GroupLayout gl = new GroupLayout(this);
 		gl.setAutoCreateContainerGaps(true);
-		gl.setAutoCreateGaps(true);
 		
 		gl.setHorizontalGroup(gl.createSequentialGroup()
 				.addComponent(leftLabel)
 				.addComponent(centerLabel)
 				.addComponent(rightLabel));
 		
-		gl.setVerticalGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-				.addComponent(leftLabel)
-				.addComponent(centerLabel)
-				.addComponent(rightLabel));
+		gl.setVerticalGroup(gl.createParallelGroup()
+				.addComponent(leftLabel, GroupLayout.Alignment.LEADING)
+				.addComponent(centerLabel, GroupLayout.Alignment.CENTER)
+				.addComponent(rightLabel, GroupLayout.Alignment.TRAILING));
 		
 		this.setLayout(gl);
 	}

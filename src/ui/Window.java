@@ -51,21 +51,21 @@ public class Window {
 
 	public Window() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		
 		view = new ViewSettings();
 
 		view.cx = Map.getWidth() / 2;
 		view.cy = Map.getHeight() / 2;
-		view.zoom = 1.2;
+		view.zoom = 1.25;
 
 		clickListeners = new ArrayList<>();
 
 		dl = new DrawLabel();
-		dl.setMaximumSize(new Dimension(99999999, 9999999));
+		dl.setMaximumSize(new Dimension(99999999, 99999999));
 		cl = new ControlLabel();
 		
 		GroupLayout gl = new GroupLayout(frame.getContentPane());
-		gl.setAutoCreateContainerGaps(true);
-		gl.setAutoCreateGaps(true);
 		
 		gl.setHorizontalGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
 				.addComponent(dl)
