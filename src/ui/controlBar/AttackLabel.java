@@ -44,10 +44,10 @@ public class AttackLabel extends JLabel {
 		title.setFont(new Font("Dialog", Font.PLAIN, 12));
 		updateLabel();
 
-		if (maxTroops - minTroops < 1)
-			minTroops = maxTroops = 1;
+		if (maxTroops - minTroops < 0)
+			maxTroops = minTroops;
 
-		troopCount = new JSlider(minTroops, maxTroops, 1);
+		troopCount = new JSlider(minTroops, maxTroops, minTroops);
 		troopCount.setMajorTickSpacing(1);
 		troopCount.setPaintLabels(true);
 		troopCount.setOpaque(false);
