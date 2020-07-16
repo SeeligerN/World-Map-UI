@@ -44,15 +44,22 @@ public class ControlLabel extends JLabel {
 	}
 	
 	public void setLabel(int labelLoc, JLabel labelToSet) {
+		
 		if (labelToSet == null)
 			labelToSet = new JLabel(); // if null was given a new empty JLabel will be created in its place. The location will be empty. 
 		
-		if (labelLoc == Window.LEFT_LABEL)
+		if (labelLoc == Window.LEFT_LABEL) {
+			this.remove(leftLabel);
 			leftLabel = labelToSet;
-		if (labelLoc == Window.CENTER_LABEL)
+		}
+		if (labelLoc == Window.CENTER_LABEL) {
+			this.remove(centerLabel);
 			centerLabel = labelToSet;
-		if (labelLoc == Window.RIGHT_LABEL)
+		}
+		if (labelLoc == Window.RIGHT_LABEL) {
+			this.remove(rightLabel);
 			rightLabel = labelToSet;
+		}
 		
 		updateLayout();
 	}
