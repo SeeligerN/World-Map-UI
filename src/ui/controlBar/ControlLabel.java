@@ -17,14 +17,16 @@ public class ControlLabel extends JLabel {
 	private JLabel leftLabel, centerLabel, rightLabel;
 	
 	public ControlLabel() {
-		setHeight(160);
+		setHeight(0);
 		
-		leftLabel = new PlayerListLabel();
+		leftLabel = new JLabel();
+		centerLabel = new JLabel();
+		rightLabel = new JLabel();
 		
-		centerLabel = new AttackLabel();
-		
-		rightLabel = new StatusLabel();
-		
+		updateLayout();
+	}
+	
+	private void updateLayout() {
 		GroupLayout gl = new GroupLayout(this);
 		gl.setAutoCreateContainerGaps(true);
 		
@@ -51,7 +53,8 @@ public class ControlLabel extends JLabel {
 			centerLabel = labelToSet;
 		if (labelLoc == Window.RIGHT_LABEL)
 			rightLabel = labelToSet;
-	
+		
+		updateLayout();
 	}
 	
 	public void setHeight(int height) {
