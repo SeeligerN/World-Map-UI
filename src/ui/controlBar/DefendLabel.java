@@ -20,7 +20,7 @@ public class DefendLabel extends JLabel {
 
 	private JLabel title;
 	private JSlider troopCount;
-	private JButton attackButton;
+	private JButton defendButton;
 
 	private String attackedCountry;
 
@@ -53,8 +53,8 @@ public class DefendLabel extends JLabel {
 					dl.defendActionPerformed(DefendLabelListener.TYPE_TROOP_COUNT_CHANGED);
 		});
 
-		attackButton = new JButton("Defend!");
-		attackButton.addActionListener(ae -> {
+		defendButton = new JButton("Defend");
+		defendButton.addActionListener(ae -> {
 			for (DefendLabelListener dl : listeners)
 				dl.defendActionPerformed(DefendLabelListener.TYPE_DEFEND);
 		});
@@ -64,10 +64,10 @@ public class DefendLabel extends JLabel {
 		gl.setAutoCreateGaps(true);
 
 		gl.setVerticalGroup(gl.createSequentialGroup().addComponent(title).addComponent(troopCount).addGap(0, 50, 9999)
-				.addGroup(gl.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(attackButton)));
+				.addGroup(gl.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(defendButton)));
 
 		gl.setHorizontalGroup(gl.createSequentialGroup().addGroup(gl.createParallelGroup().addComponent(title)
-				.addComponent(troopCount).addComponent(attackButton, GroupLayout.Alignment.TRAILING)));
+				.addComponent(troopCount).addComponent(defendButton, GroupLayout.Alignment.TRAILING)));
 
 		this.setLayout(gl);
 	}
