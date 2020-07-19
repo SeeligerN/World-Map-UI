@@ -19,16 +19,20 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 import ui.Map.Country;
+import ui.controlBar.ControlLabel;
 
 public class Window {
 
-	/**
-	 * 
-	 */
+	public static final int LEFT_LABEL = 0;
+	public static final int CENTER_LABEL = 1;
+	public static final int RIGHT_LABEL = 2;
+
 	private JFrame frame;
 
 	private ViewSettings view;
@@ -36,6 +40,7 @@ public class Window {
 	private List<ClickListener> clickListeners;
 
 	private DrawLabel dl;
+	private ControlLabel cl;
 
 	private Color bgColor = Color.WHITE;
 	private boolean doHover = true;
@@ -47,17 +52,29 @@ public class Window {
 
 	public Window() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+
 		view = new ViewSettings();
 
 		view.cx = Map.getWidth() / 2;
 		view.cy = Map.getHeight() / 2;
-		view.zoom = 1;
+		view.zoom = 1.25;
 
 		clickListeners = new ArrayList<>();
 
 		dl = new DrawLabel();
-		frame.add(dl);
-		
+		dl.setMaximumSize(new Dimension(99999999, 99999999));
+		cl = new ControlLabel();
+
+		GroupLayout gl = new GroupLayout(frame.getContentPane());
+
+		gl.setHorizontalGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(dl).addComponent(cl,
+				GroupLayout.Alignment.CENTER));
+
+		gl.setVerticalGroup(gl.createSequentialGroup().addComponent(dl).addComponent(cl));
+
+		frame.setLayout(gl);
+
 		PanMouse pm = new PanMouse();
 		dl.addMouseListener(pm);
 		dl.addMouseMotionListener(pm);
@@ -67,8 +84,7 @@ public class Window {
 		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Map");
-		frame.setVisible(true);
+		frame.setTitle("Risk");
 	}
 
 	public void addClickListener(ClickListener cl) {
@@ -84,6 +100,38 @@ public class Window {
 	public void setTitle(String title) {
 		if (title != null)
 			frame.setTitle(title);
+	}
+	
+	public void setVisible(boolean visible) {
+		frame.setVisible(visible);
+	}
+
+	public void showFeedbackDialog(String title, String attacker, String defender, String attackedCountry,
+			String originCountry, int[] diceResultsAttacker, int[] diceResultsDefender, int lossesAttacker,
+			int lossesDefender, String resultText) {
+
+		if (title == null || attacker == null || defender == null || attackedCountry == null || originCountry == null
+				|| resultText == null || diceResultsAttacker == null || diceResultsDefender == null)
+			return;
+		if (diceResultsAttacker.length == 0 || diceResultsDefender.length == 0) // both dice result arrays need to
+																				// contain at least one int
+			return;
+
+		new FeedbackWindow(frame, title, attacker, defender, attackedCountry, originCountry, diceResultsAttacker,
+				diceResultsDefender, lossesAttacker, lossesDefender, resultText);
+	}
+	
+	public void setControlLabel(int labelLoc, JLabel label) {
+		cl.setLabel(labelLoc, label);
+	}
+
+	public void showControlBar(boolean show) {
+		if (show)
+			cl.setHeight(160);
+		else
+			cl.setHeight(0);
+		
+		SwingUtilities.updateComponentTreeUI(frame);
 	}
 
 	public void doHover(boolean dohover) {
@@ -370,7 +418,8 @@ public class Window {
 					String[] lines = hoveredCountry.getLabel().split("\n");
 
 					float labelX = (float) joinedShape.getBounds().getCenterX();
-					float labelYBaseLine = (float) joinedShape.getBounds().getCenterY() + 1.8f * g.getFont().getSize() * lines.length / 2;
+					float labelYBaseLine = (float) joinedShape.getBounds().getCenterY()
+							+ 1.8f * g.getFont().getSize() * lines.length / 2;
 
 					for (int i = 0; i < lines.length; i++) {
 
