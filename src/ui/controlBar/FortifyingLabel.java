@@ -20,7 +20,7 @@ public class FortifyingLabel extends JLabel {
 
 	private JLabel title;
 	private JSlider troopCount;
-	private JButton attackButton;
+	private JButton fortifyButton;
 
 	private String fortifyingCountry;
 
@@ -53,8 +53,8 @@ public class FortifyingLabel extends JLabel {
 					dl.fortifyActionPerformed(FortifyLabelListener.TYPE_TROOP_COUNT_CHANGED);
 		});
 
-		attackButton = new JButton("Fortify");
-		attackButton.addActionListener(ae -> {
+		fortifyButton = new JButton("Fortify");
+		fortifyButton.addActionListener(ae -> {
 			for (FortifyLabelListener dl : listeners)
 				dl.fortifyActionPerformed(FortifyLabelListener.TYPE_FORTIFY);
 		});
@@ -64,10 +64,10 @@ public class FortifyingLabel extends JLabel {
 		gl.setAutoCreateGaps(true);
 
 		gl.setVerticalGroup(gl.createSequentialGroup().addComponent(title).addComponent(troopCount).addGap(0, 50, 9999)
-				.addGroup(gl.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(attackButton)));
+				.addGroup(gl.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(fortifyButton)));
 
 		gl.setHorizontalGroup(gl.createSequentialGroup().addGroup(gl.createParallelGroup().addComponent(title)
-				.addComponent(troopCount).addComponent(attackButton, GroupLayout.Alignment.TRAILING)));
+				.addComponent(troopCount).addComponent(fortifyButton, GroupLayout.Alignment.TRAILING)));
 
 		this.setLayout(gl);
 	}

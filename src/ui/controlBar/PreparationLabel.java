@@ -45,13 +45,13 @@ public class PreparationLabel extends JLabel {
 		fastMode.setOpaque(false);
 		fastMode.addChangeListener(e -> {
 			for (PreparationLabelListener dl : listeners)
-				dl.moveActionPerformed(PreparationLabelListener.TYPE_FAST_MODE_CHANGED);
+				dl.preparationActionPerformed(PreparationLabelListener.TYPE_FAST_MODE_CHANGED);
 		});
 
 		deployButton = new JButton("Deploy");
 		deployButton.addActionListener(a -> {
 			for (PreparationLabelListener dl : listeners)
-				dl.moveActionPerformed(PreparationLabelListener.TYPE_DEPLOY);
+				dl.preparationActionPerformed(PreparationLabelListener.TYPE_DEPLOY);
 		});		
 
 		GroupLayout gl = new GroupLayout(this);
@@ -89,11 +89,11 @@ public class PreparationLabel extends JLabel {
 		updateLabel();
 	}
 
-	public void addMoveLabelListener(PreparationLabelListener listener) {
+	public void addPreparationLabelListener(PreparationLabelListener listener) {
 		listeners.add(listener);
 	}
 
-	public void removeMoveLabelListener(PreparationLabelListener listener) {
+	public void removePreparationLabelListener(PreparationLabelListener listener) {
 		listeners.remove(listener);
 	}
 
@@ -102,7 +102,7 @@ public class PreparationLabel extends JLabel {
 		public static final int TYPE_DEPLOY = 0;
 		public static final int TYPE_FAST_MODE_CHANGED = 2;
 
-		public void moveActionPerformed(int type);
+		public void preparationActionPerformed(int type);
 
 	}
 }

@@ -58,8 +58,8 @@ public class MoveLabel extends JLabel {
 
 		moveButton = new JButton("Move");
 		moveButton.addActionListener(a -> {
-			for (MoveLabelListener dl : listeners)
-				dl.moveActionPerformed(MoveLabelListener.TYPE_MOVE);
+			for (MoveLabelListener ml : listeners)
+				ml.moveActionPerformed(MoveLabelListener.TYPE_MOVE);
 		});
 		
 		GroupLayout gl = new GroupLayout(this);
