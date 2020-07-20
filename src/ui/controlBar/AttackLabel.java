@@ -94,11 +94,17 @@ public class AttackLabel extends JLabel {
 	}
 
 	public void setAttacker(String attacker) {
+		if (attacker == null)
+			attacker = "";
+		
 		this.attacker = attacker;
 		updateLabel();
 	}
 
 	public void setDefender(String defender) {
+		if (defender == null)
+			defender = "";
+		
 		this.defender = defender;
 		updateLabel();
 	}

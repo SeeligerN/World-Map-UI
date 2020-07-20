@@ -89,11 +89,17 @@ public class MoveLabel extends JLabel {
 	}
 	
 	public void setMoveFrom(String moveFrom) {
+		if (moveFrom == null)
+			moveFrom = "";
+		
 		this.moveFrom = moveFrom;
 		updateLabel();
 	}
 	
 	public void setMoveTo(String moveTo) {
+		if (moveTo == null)
+			moveTo = "";
+		
 		this.moveTo = moveTo;
 		updateLabel();
 	}
