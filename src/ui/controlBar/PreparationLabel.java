@@ -87,6 +87,7 @@ public class PreparationLabel extends JLabel {
 	public void setCountry(String country) {
 		if (country == null)
 			country = "";
+    
 		this.country = country;
 		updateLabel();
 	}
