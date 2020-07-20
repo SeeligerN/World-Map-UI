@@ -73,7 +73,11 @@ public class DefendLabel extends JLabel {
 	}
 
 	public void setAttackedCountry(String attackedCountry) {
+		if (attackedCountry == null)
+			attackedCountry = "";
+		
 		this.attackedCountry = attackedCountry;
+		updateLabel();
 	}
 
 	public int getTroopCount() {

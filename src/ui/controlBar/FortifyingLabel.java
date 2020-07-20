@@ -73,7 +73,11 @@ public class FortifyingLabel extends JLabel {
 	}
 
 	public void setFortifyingCountry(String attackedCountry) {
+		if (attackedCountry == null)
+			attackedCountry = "";
+		
 		this.fortifyingCountry = attackedCountry;
+		updateLabel();
 	}
 
 	public int getTroopCount() {
