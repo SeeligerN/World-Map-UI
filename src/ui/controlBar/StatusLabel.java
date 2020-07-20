@@ -111,8 +111,10 @@ public class StatusLabel extends JLabel {
 	}
 	
 	public interface StatusLabelListener {
+		
 		public static final int TYPE_MAP_MODE_CHANGED = 0;
 		
 		public void statusActionPerformed(int tpye);
+		
 	}
 }

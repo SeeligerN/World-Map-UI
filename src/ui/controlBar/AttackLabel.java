@@ -44,7 +44,7 @@ public class AttackLabel extends JLabel {
 		title.setFont(new Font("Dialog", Font.PLAIN, 12));
 		updateLabel();
 
-		if (maxTroops - minTroops < 0)
+		if (maxTroops < minTroops)
 			maxTroops = minTroops;
 
 		troopCount = new JSlider(minTroops, maxTroops, minTroops);
@@ -94,11 +94,17 @@ public class AttackLabel extends JLabel {
 	}
 
 	public void setAttacker(String attacker) {
+		if (attacker == null)
+			attacker = "";
+		
 		this.attacker = attacker;
 		updateLabel();
 	}
 
 	public void setDefender(String defender) {
+		if (defender == null)
+			defender = "";
+		
 		this.defender = defender;
 		updateLabel();
 	}
