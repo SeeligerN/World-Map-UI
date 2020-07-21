@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
+import ui.Language;
+
 public class AttackLabel extends JLabel {
 
 	/**
@@ -85,8 +87,8 @@ public class AttackLabel extends JLabel {
 	}
 
 	private void updateLabel() {
-		title.setText("<html><div style='text-align: center;'>" + "<a style='font-size: 16'><b>Attack</b></a><br>"
-				+ "<b>" + attacker + "</b> attacks <b>" + defender + "</b></div></html>");
+		title.setText("<html><div style='text-align: center;'>" + Language.get("attack_title") + "<br>"
+				+ Language.get("attack_text", attacker, defender) + "</div></html>");
 	}
 
 	public int getTroopcount() {
