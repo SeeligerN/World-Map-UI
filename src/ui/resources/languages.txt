@@ -7,5 +7,8 @@
 	"players_title" : { "<a style='font-size: 16;'><b>Players</b><a>", "<a style='font-size: 16;'><b>Spieler</b><a>" }, 
 	"defend_title" : { "<a style='font-size: 16'><b>Defend</b></a>", "<a style='font-size: 16'><b>Verteidigen</b></a>" }, 
 	"defend_text" : { "defend <b>[0]</b>", "<b>[0]</b> verteidigen" }, 
-	"defend_confirm" : { "Defend", "Verteidigen" }
+	"defend_confirm" : { "Defend", "Verteidigen" }, 
+	"fortify_title" : { "<a style='font-size: 16'><b>Fortify</b></a>", "<a style='font-size: 16'><b>Nachziehen</b></a>" }, 
+	"fortify_text" : { "fortify <b>[0]</b>", "nachziehen nach <b>[0]</b>" }, 
+	"fortify_confirm" : { "Fortify", "Nachziehen" }
 }
