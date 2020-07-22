@@ -41,9 +41,6 @@ public class Language {
 		for (String string : lines)
 			appended += string;
 		
-		for (String s : lines)
-			System.out.println(s);
-		
 		Pattern p = Pattern.compile("\\s*\"(.*?)\" : \\{ \"(.*?)\", \"(.*?)\" \\}");
 		Matcher m = p.matcher(appended);
 		while (m.find())
