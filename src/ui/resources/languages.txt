@@ -13,5 +13,10 @@
 	"fortify_confirm" : { "Fortify", "Verstärken" }, 
 	"move_title" : { "<a style='font-size: 16'><b>Move</b></a>", "<a style='font-size: 16'><b>Bewegen</b></a>" }, 
 	"move_text" : { "<b>[0]</b> moves to <b>[1]</b>", "von <b>[0]</b> nach <b>[1]</b> bewegen" }, 
-	"move_confirm" : { "Move", "Bewegen" }
+	"move_confirm" : { "Move", "Bewegen" }, 
+	"preparation_title" : { "<a style='font-size: 16'><b>Prepare</b></a>", "<a style='font-size: 16'><b>Vorbereiten</b></a>" }, 
+	"preparation_text_s" : { "deploy <b>[0]</b> troop to <b>[1]</b>", "<b>[0]</b> Truppe in <b>[1]</b> stationieren" }, 
+	"preparation_text_m" : { "deploy <b>[0]</b> troops to <b>[1]</b>", "<b>[0]</b> Truppen in <b>[1]</b> stationieren" }, 
+	"preparation_fast" : { "fast mode", "schnell modus" }, 
+	"preparation_confirm" : { "Deploy", "Stationieren" }
 }
