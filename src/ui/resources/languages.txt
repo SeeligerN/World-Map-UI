@@ -1,0 +1,25 @@
+"languages" : { "eng", "ger" },
+"values" : { 
+	"attack_title" : { "<a style='font-size: 16'><b>Attack</b></a>", "<a style='font-size: 16'><b>Angriff</b></a>" },
+	"attack_text" : { "<b>[0]</b> attacks <b>[1]</b>", "<b>[0]</b> greift <b>[1]</b> an" }, 
+	"attack_confirm" : { "Attack", "Attacke" }, 
+	"attack_dismiss" : { "Dismiss", "Ablehnen" }, 
+	"players_title" : { "<a style='font-size: 16;'><b>Players</b><a>", "<a style='font-size: 16;'><b>Spieler</b><a>" }, 
+	"defend_title" : { "<a style='font-size: 16'><b>Defend</b></a>", "<a style='font-size: 16'><b>Verteidigen</b></a>" }, 
+	"defend_text" : { "defend <b>[0]</b>", "<b>[0]</b> verteidigen" }, 
+	"defend_confirm" : { "Defend", "Verteidigen" }, 
+	"fortify_title" : { "<a style='font-size: 16'><b>Fortify</b></a>", "<a style='font-size: 16'><b>Verstärken</b></a>" }, 
+	"fortify_text" : { "fortify <b>[0]</b>", "<b>[0]</b> verstärken" }, 
+	"fortify_confirm" : { "Fortify", "Verstärken" }, 
+	"move_title" : { "<a style='font-size: 16'><b>Move</b></a>", "<a style='font-size: 16'><b>Bewegen</b></a>" }, 
+	"move_text" : { "<b>[0]</b> moves to <b>[1]</b>", "von <b>[0]</b> nach <b>[1]</b> bewegen" }, 
+	"move_confirm" : { "Move", "Bewegen" }, 
+	"preparation_title" : { "<a style='font-size: 16'><b>Prepare</b></a>", "<a style='font-size: 16'><b>Vorbereiten</b></a>" }, 
+	"preparation_text_s" : { "deploy <b>[0]</b> troop to <b>[1]</b>", "<b>[0]</b> Truppe in <b>[1]</b> stationieren" }, 
+	"preparation_text_m" : { "deploy <b>[0]</b> troops to <b>[1]</b>", "<b>[0]</b> Truppen in <b>[1]</b> stationieren" }, 
+	"preparation_fast" : { "fast mode", "schnell modus" }, 
+	"preparation_confirm" : { "Deploy", "Stationieren" }, 
+	"status_title" : { "<a style='font-size: 16'><b>Player Stats</b></a>", "<a style='font-size: 16'><b>Spielerstatistiken</b></a>" }, 
+	"status_reinf" : { "Reinforcements :", "Verstärkung :" }
+	"status_bonus" : { "Bonus :", "Bonus :" }
+}

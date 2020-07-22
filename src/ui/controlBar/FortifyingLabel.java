@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
+import ui.Language;
+
 public class FortifyingLabel extends JLabel {
 
 	/**
@@ -53,7 +55,7 @@ public class FortifyingLabel extends JLabel {
 					dl.fortifyActionPerformed(FortifyLabelListener.TYPE_TROOP_COUNT_CHANGED);
 		});
 
-		fortifyButton = new JButton("Fortify");
+		fortifyButton = new JButton(Language.get("fortify_confirm"));
 		fortifyButton.addActionListener(ae -> {
 			for (FortifyLabelListener dl : listeners)
 				dl.fortifyActionPerformed(FortifyLabelListener.TYPE_FORTIFY);
@@ -93,8 +95,8 @@ public class FortifyingLabel extends JLabel {
 	}
 
 	private void updateLabel() {
-		title.setText("<html><div style='text-align: center;'>" + "<a style='font-size: 16'><b>Fortify</b></a><br>"
-				+ "fortify <b>" + fortifyingCountry + "</b>" + "</div></html>");
+		title.setText("<html><div style='text-align: center;'>" + Language.get("fortify_title") + "<br>"
+				+ Language.get("fortify_text", fortifyingCountry) + "</div></html>");
 	}
 
 	public interface FortifyLabelListener {

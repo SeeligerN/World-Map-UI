@@ -11,6 +11,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import ui.Language;
+
 public class PreparationLabel extends JLabel {
 	/**
 	 * 
@@ -40,7 +42,7 @@ public class PreparationLabel extends JLabel {
 		title.setFont(new Font("Dialog", Font.PLAIN, 12));
 		updateLabel();
 
-		fastMode = new JCheckBox("fast mode");
+		fastMode = new JCheckBox(Language.get("preparation_fast"));
 		fastMode.setFont(new Font("Dialog", Font.PLAIN, 12));
 		fastMode.setOpaque(false);
 		fastMode.addChangeListener(e -> {
@@ -48,7 +50,7 @@ public class PreparationLabel extends JLabel {
 				dl.preparationActionPerformed(PreparationLabelListener.TYPE_FAST_MODE_CHANGED);
 		});
 
-		deployButton = new JButton("Deploy");
+		deployButton = new JButton(Language.get("preparation_confirm"));
 		deployButton.addActionListener(a -> {
 			for (PreparationLabelListener dl : listeners)
 				dl.preparationActionPerformed(PreparationLabelListener.TYPE_DEPLOY);
@@ -70,8 +72,8 @@ public class PreparationLabel extends JLabel {
 	}
 
 	private void updateLabel() {
-		title.setText("<html><div style='text-align: center;'><a style='font-size: 16'><b>Prepare</b></a><br>"
-				+ "deploy <b>" + troops + "</b> troop" + (Math.abs(troops) != 1 ? "s" : "") + " to <b>" + country + "</b>"
+		title.setText("<html><div style='text-align: center;'>" + Language.get("preparation_title") + "<br>"
+				+ Language.get("preparation_text_" + (troops == 1 || troops == -1 ? "s" : "m"), troops, country)
 				+ "</div></html>");
 	}
 	

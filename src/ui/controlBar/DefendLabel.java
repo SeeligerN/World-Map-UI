@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
+import ui.Language;
+
 public class DefendLabel extends JLabel {
 
 	/**
@@ -53,7 +55,7 @@ public class DefendLabel extends JLabel {
 					dl.defendActionPerformed(DefendLabelListener.TYPE_TROOP_COUNT_CHANGED);
 		});
 
-		defendButton = new JButton("Defend");
+		defendButton = new JButton(Language.get("defend_confirm"));
 		defendButton.addActionListener(ae -> {
 			for (DefendLabelListener dl : listeners)
 				dl.defendActionPerformed(DefendLabelListener.TYPE_DEFEND);
@@ -93,8 +95,8 @@ public class DefendLabel extends JLabel {
 	}
 
 	private void updateLabel() {
-		title.setText("<html><div style='text-align: center;'>" + "<a style='font-size: 16'><b>Defend</b></a><br>"
-				+ "defend <b>" + attackedCountry + "</b>" + "</div></html>");
+		title.setText("<html><div style='text-align: center;'>" + Language.get("defend_title") + "<br>"
+				+ Language.get("defend_text", attackedCountry) + "</div></html>");
 	}
 
 	public interface DefendLabelListener {

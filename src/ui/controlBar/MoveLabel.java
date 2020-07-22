@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
+import ui.Language;
+
 public class MoveLabel extends JLabel {
 
 	/**
@@ -56,7 +58,7 @@ public class MoveLabel extends JLabel {
 					dl.moveActionPerformed(MoveLabelListener.TYPE_TROOP_COUNT_CHANGED);
 		});
 
-		moveButton = new JButton("Move");
+		moveButton = new JButton(Language.get("move_confirm"));
 		moveButton.addActionListener(a -> {
 			for (MoveLabelListener ml : listeners)
 				ml.moveActionPerformed(MoveLabelListener.TYPE_MOVE);
@@ -83,9 +85,8 @@ public class MoveLabel extends JLabel {
 	
 	private void updateLabel() {
 		title.setText("<html><div style='text-align: center;'>"
-				+ "<a style='font-size: 16'><b>Move</b></a><br>"
-				+ "<b>" + moveFrom + "</b> moves to <b>" + moveTo + "</b>"
-				+ "</div></html>");
+				+ Language.get("move_title") + "<br>"
+				+ Language.get("move_text", moveFrom, moveTo) + "</div></html>");
 	}
 	
 	public void setMoveFrom(String moveFrom) {

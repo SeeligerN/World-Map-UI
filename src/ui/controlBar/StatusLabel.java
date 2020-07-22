@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import ui.Language;
+
 public class StatusLabel extends JLabel {
 	
 	/**
@@ -43,8 +45,7 @@ public class StatusLabel extends JLabel {
 		
 		this.setMaximumSize(new Dimension(9999999, 500));
 
-		title = new JLabel("<html><div style='text-align: center;font-size: 16'>"
-				+ "<b>Player Stats</b></div>", SwingConstants.CENTER);
+		title = new JLabel("<html><div style='text-align: center;'>" + Language.get("status_title") + "</div>", SwingConstants.CENTER);
 		title.setFont(new Font("Dialog", Font.PLAIN, 12));
 		
 		status = new JLabel("");
@@ -83,8 +84,8 @@ public class StatusLabel extends JLabel {
 	
 	private void updateLabel() {
 		status.setText("<html><head><style>td { padding: 0px; }</style></head><table>"
-				+ "<tr><td>Reinforcements : </td><td><b>" + reinforcements + "</b></td></tr>"
-				+ "<tr><td>Bonus : </td><td><b>" + bonus + "</b></td></tr>"
+				+ "<tr><td>" + Language.get("status_reinf") + "</td><td><b>" + reinforcements + "</b></td></tr>"
+				+ "<tr><td>" + Language.get("status_bonus") + "</td><td><b>" + bonus + "</b></td></tr>"
 				+ "</table></html>");
 	}
 	
