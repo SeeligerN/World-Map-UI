@@ -18,5 +18,8 @@
 	"preparation_text_s" : { "deploy <b>[0]</b> troop to <b>[1]</b>", "<b>[0]</b> Truppe in <b>[1]</b> stationieren" }, 
 	"preparation_text_m" : { "deploy <b>[0]</b> troops to <b>[1]</b>", "<b>[0]</b> Truppen in <b>[1]</b> stationieren" }, 
 	"preparation_fast" : { "fast mode", "schnell modus" }, 
-	"preparation_confirm" : { "Deploy", "Stationieren" }
+	"preparation_confirm" : { "Deploy", "Stationieren" }, 
+	"status_title" : { "<a style='font-size: 16'><b>Player Stats</b></a>", "<a style='font-size: 16'><b>Spielerstatistiken</b></a>" }, 
+	"status_reinf" : { "Reinforcements :", "Verstärkung :" }
+	"status_bonus" : { "Bonus :", "Bonus :" }
 }
