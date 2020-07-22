@@ -59,13 +59,13 @@ public class AttackLabel extends JLabel {
 					al.attackActionPerformed(AttackLabelListener.TYPE_TROOP_COUNT_CHANGED);
 		});
 
-		attackButton = new JButton("Attack!");
+		attackButton = new JButton(Language.get("attack_confirm"));
 		attackButton.addActionListener(ae -> {
 			for (AttackLabelListener al : listeners)
 				al.attackActionPerformed(AttackLabelListener.TYPE_ATTACK);
 		});
 
-		dismissButton = new JButton("Dismiss");
+		dismissButton = new JButton(Language.get("attack_dismiss"));
 		dismissButton.addActionListener(ae -> {
 			for (AttackLabelListener al : listeners)
 				al.attackActionPerformed(AttackLabelListener.TYPE_DISMISS);

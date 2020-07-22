@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 public class Language {
 
+	private static int preference = 0;
 	static String[] languages;
 	static List<String[]> keyValues;
 	
@@ -40,6 +41,9 @@ public class Language {
 		for (String string : lines)
 			appended += string;
 		
+		for (String s : lines)
+			System.out.println(s);
+		
 		Pattern p = Pattern.compile("\\s*\"(.*?)\" : \\{ \"(.*?)\", \"(.*?)\" \\}");
 		Matcher m = p.matcher(appended);
 		while (m.find())
@@ -48,15 +52,28 @@ public class Language {
 	}
 
 	public static void setLanguagePreference(String lang) {
-
+		for (int i = 0; i < languages.length; i++)
+			if (languages[i].equals(lang)) {
+				preference = i;
+				return;
+			}
 	}
 
 	public static String getLanguagePreference() {
-		return null;
+		return languages[preference];
 	}
 
 	public static String get(String id, Object... args) {
+		for (String[] sa : keyValues)
+			if (sa[0].equals(id)) {
+				String filledVal = sa[1 + preference];
+				
+				for (int i = 0; i < args.length; i++)
+					filledVal = filledVal.replaceAll("\\[" + i + "\\]", args[i].toString());
+				
+				return filledVal;
+			}
 		
-		return "";
+		return null;
 	}
 }
