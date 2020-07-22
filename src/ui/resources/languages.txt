@@ -11,5 +11,7 @@
 	"fortify_title" : { "<a style='font-size: 16'><b>Fortify</b></a>", "<a style='font-size: 16'><b>Verstärken</b></a>" }, 
 	"fortify_text" : { "fortify <b>[0]</b>", "<b>[0]</b> verstärken" }, 
 	"fortify_confirm" : { "Fortify", "Verstärken" }, 
-	"move_title" : { "<a style='font-size: 16'><b>Move</b></a>", "<a style='font-size: 16'><b>Bewegen</b></a>" }
+	"move_title" : { "<a style='font-size: 16'><b>Move</b></a>", "<a style='font-size: 16'><b>Bewegen</b></a>" }, 
+	"move_text" : { "<b>[0]</b> moves to <b>[1]</b>", "von <b>[0]</b> nach <b>[1]</b> bewegen" }, 
+	"move_confirm" : { "Move", "Bewegen" }
 }
