@@ -7,6 +7,8 @@ import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import ui.Language;
+
 public class PlayerListLabel extends JLabel {
 
 	/**
@@ -25,7 +27,7 @@ public class PlayerListLabel extends JLabel {
 	public PlayerListLabel(String[] names) {
 		this.setMaximumSize(new Dimension(9999999, 500));
 
-		title = new JLabel("<html><div style='text-align: center;font-size: 16;'><b>Players</b></div>",
+		title = new JLabel("<html><div style='text-align: center;'>" + Language.get("players_title") + "</div></html>",
 				SwingConstants.CENTER);
 		title.setFont(new Font("Dialog", Font.PLAIN, 12));
 

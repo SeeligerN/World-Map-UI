@@ -3,5 +3,6 @@
 	"attack_title" : { "<a style='font-size: 16'><b>Attack</b></a>", "<a style='font-size: 16'><b>Angriff</b></a>" },
 	"attack_text" : { "<b>[0]</b> attacks <b>[1]</b>", "<b>[0]</b> greift <b>[1]</b> an" }, 
 	"attack_confirm" : { "Attack", "Attacke" }, 
-	"attack_dismiss" : { "Dismiss", "Ablehnen" }
+	"attack_dismiss" : { "Dismiss", "Ablehnen" }, 
+	"players_title" : { "<a style='font-size: 16;'><b>Players</b><a>", "<a style='font-size: 16;'><b>Spieler</b><a>" }
 }
