@@ -20,6 +20,11 @@
 	"preparation_fast" : { "fast mode", "schnell modus" }, 
 	"preparation_confirm" : { "Deploy", "Stationieren" }, 
 	"status_title" : { "<a style='font-size: 16'><b>Player Stats</b></a>", "<a style='font-size: 16'><b>Spielerstatistiken</b></a>" }, 
-	"status_reinf" : { "Reinforcements :", "Verstärkung :" }
-	"status_bonus" : { "Bonus :", "Bonus :" }
+	"status_reinf" : { "Reinforcements :", "Verstärkung :" }, 
+	"status_bonus" : { "Bonus :", "Bonus :" }, 
+	"feedback_text" : { "<b>[0]</b> attacked <b>[1]</b><br>in <b>[3]</b> from <b>[2]</b>", "<b>[0]</b> greift <b>[1]</b><br>in <b>[3]</b> von <b>[2]</b>" }, 
+	"feedback_attacker" : { "Attacker", "Angreifer" }, 
+	"feedback_defender" : { "Defender", "Verteidiger" }, 
+	"feedback_dice" : { "Dice results", "Würfelergebnisse" }, 
+	"feedback_losses" : { "Losses", "Verluste" }
 }
