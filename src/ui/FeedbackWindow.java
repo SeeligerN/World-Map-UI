@@ -9,6 +9,14 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+/**
+ * This class provides a way to give Feedback to the User after the end of one
+ * round by showing results of the dice and summing up who lost what and what is
+ * happening to the conflicted Country.
+ * 
+ * @author Niklas S.
+ *
+ */
 public class FeedbackWindow {
 
 	private JDialog dialog;
@@ -16,6 +24,27 @@ public class FeedbackWindow {
 	private JLabel titleLabel, action, dice, result;
 	private JSeparator sep1, sep2;
 
+	/**
+	 * Constructor to create a Feedback window and show it immedeately.
+	 * 
+	 * @param parent              is the parent JFrame object above which the dialog
+	 *                            will always appear.
+	 * @param title               is the Window title on the Feedbackwindow.
+	 * @param attacker            is the String representation of the attacker.
+	 * @param defender            is the String representation of the defender.
+	 * @param attackedCountry     is the String representation of the attacked
+	 *                            country.
+	 * @param originCountry       is the String representation of the country from
+	 *                            which the attacked country is being attacked.
+	 * @param diceResultsAttacker are the results of the dice throws of the attacker
+	 *                            in an Integer array.
+	 * @param diceResultsDefender are the results of the dice throws of the defender
+	 *                            in an Integer array.
+	 * @param lossesAttacker      are the Troops of the Attacker lost in the battle.
+	 * @param lossesDefender      are the Troops of the defender lost in the battle.
+	 * @param resultText          is the short summary of the fight that is
+	 *                            displayed below the lower separator.
+	 */
 	public FeedbackWindow(JFrame parent, String title, String attacker, String defender, String attackedCountry,
 			String originCountry, int[] diceResultsAttacker, int[] diceResultsDefender, int lossesAttacker,
 			int lossesDefender, String resultText) {
