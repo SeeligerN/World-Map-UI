@@ -12,40 +12,40 @@ public class Language {
 	private static int preference = 0;
 	static String[] languages;
 	static List<String[]> keyValues;
-	
+
 	static {
 		// load language file
 		InputStream is = Map.class.getResourceAsStream("/ui/resources/languages.txt");
 		Scanner sc = new Scanner(is);
 		List<String> lines = new ArrayList<>();
-		
+
 		while (sc.hasNextLine()) {
 			lines.add(sc.nextLine().split("//")[0]); // line without potential line comment
 		}
-		
+
 		sc.close();
-		
+
 		// parsing line data
 		String[] langHeads = lines.get(0).split("\"");
 		languages = new String[(langHeads.length - 3) / 2];
 		for (int i = 0; i < languages.length; i++)
 			languages[i] = langHeads[i * 2 + 3];
-		
+
 		lines.remove(0);
 		lines.remove(0);
 		lines.remove(lines.size() - 1);
-		
+
 		keyValues = new ArrayList<>();
-		
+
 		String appended = "";
 		for (String string : lines)
 			appended += string;
-		
+
 		Pattern p = Pattern.compile("\\s*\"(.*?)\" : \\{ \"(.*?)\", \"(.*?)\" \\}");
 		Matcher m = p.matcher(appended);
 		while (m.find())
-			keyValues.add(new String[] {m.group(1), m.group(2), m.group(3)});
-		
+			keyValues.add(new String[] { m.group(1), m.group(2), m.group(3) });
+
 	}
 
 	public static void setLanguagePreference(String lang) {
@@ -64,13 +64,14 @@ public class Language {
 		for (String[] sa : keyValues)
 			if (sa[0].equals(id)) {
 				String filledVal = sa[1 + preference];
-				
+
 				for (int i = 0; i < args.length; i++)
-					filledVal = filledVal.replaceAll("\\[" + i + "\\]", args[i].toString());
-				
+					if (args[i] != null)
+						filledVal = filledVal.replaceAll("\\[" + i + "\\]", args[i].toString());
+
 				return filledVal;
 			}
-		
+
 		return null;
 	}
 }
