@@ -9,21 +9,39 @@ import javax.swing.SwingConstants;
 
 import ui.Language;
 
+/**
+ * This class is the label showing the players in the game. The label only shows
+ * information and is cannot be interacted with.
+ * 
+ * @author Niklas S.
+ *
+ */
 public class PlayerListLabel extends JLabel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private JLabel title;
 
 	private JLabel[] playerNames;
 
+	/**
+	 * This constructor creates a new PlayerListLabel that is completely empty. The
+	 * Label will not be attached to any Window.
+	 */
 	public PlayerListLabel() {
 		this(null);
 	}
 
+	/**
+	 * This constructor creates a new PlayerListLabel with the specified player
+	 * names in their slots.
+	 * 
+	 * @param names is a String[] that contains the names of all the players in the
+	 *              game up to a maximum of 6 players. If names is null a
+	 *              PlayerListLabel is created where no players are listed. If a
+	 *              player in the names array is null that slot is skipped and will
+	 *              remain empty.
+	 */
 	public PlayerListLabel(String[] names) {
 		this.setMaximumSize(new Dimension(9999999, 500));
 
@@ -58,6 +76,15 @@ public class PlayerListLabel extends JLabel {
 		this.setLayout(gl);
 	}
 
+	/**
+	 * This method updates the player at the specified spot the the specified
+	 * String.
+	 * 
+	 * @param playerNum the player slot to be updated. If playerNum is outside of
+	 *                  the range 0-5 nothing will happen. The slots are ordered
+	 *                  left to right then top to bottom.
+	 * @param player    is the String that is to be inserted into the player slot.
+	 */
 	public void setPlayer(int playerNum, String player) {
 		if (playerNum < 0 || playerNum > 5)
 			return;

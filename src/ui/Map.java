@@ -14,6 +14,13 @@ import java.util.Scanner;
 
 import ui.Window.ViewSettings;
 
+/**
+ * This class reads, manages and draws mapdata. Loading happens in a static
+ * block and is therefore the first thing that happens.
+ * 
+ * @author Niklas S.
+ *
+ */
 public class Map {
 
 	private static double mapWidth;
@@ -23,6 +30,9 @@ public class Map {
 
 	private static int[][] adjacencyMatrix;
 
+	/*
+	 * loading in map data
+	 */
 	static {
 		try {
 			InputStream is = Map.class.getResourceAsStream("/ui/resources/riskmapdata.txt");
@@ -96,18 +106,40 @@ public class Map {
 		}
 	}
 
+	/**
+	 * Getter for the width of the map.
+	 * 
+	 * @return the width of the map.
+	 */
 	static double getWidth() {
 		return mapWidth;
 	}
 
+	/**
+	 * Getter for the height of the map.
+	 * 
+	 * @return the height of the map.
+	 */
 	static double getHeight() {
 		return mapHeight;
 	}
 
+	/**
+	 * Getter for the list of countries.
+	 * 
+	 * @return a list of all Countries listed in the mapdata.
+	 */
 	public static List<Country> getCountries() {
 		return countries;
 	}
 
+	/**
+	 * Getter for specific country contained in mapdata based on its String id.
+	 * 
+	 * @param id is the String id that will be searched for.
+	 * @return the country that has the same String id as the argumend id. Should no
+	 *         such country exist in the map data null will be returned.
+	 */
 	public static Country getCountry(String id) {
 		for (Country c : countries)
 			if (c.id.equalsIgnoreCase(id))
@@ -116,6 +148,14 @@ public class Map {
 		return null;
 	}
 
+	/**
+	 * This is a method for drawing the countries in the mapdata with Graphics g and
+	 * transformed to comply with the ViewSettings.
+	 * 
+	 * @param g    is the Grahpics2D object with which the countries will be drawn.
+	 * @param view is the ViewSettings that will be used to transform the country
+	 *             data to fit with the settings.
+	 */
 	public static void drawCountries(Graphics2D g, ViewSettings view) {
 
 		g.setStroke(new BasicStroke(1.5f));
@@ -178,16 +218,46 @@ public class Map {
 		g.setStroke(new BasicStroke(1.5f));
 	}
 
+	/**
+	 * Method for deciding whether or not to draw a black label on top of the
+	 * specified color. The average RGB value has to be above 80 for this method to
+	 * return true.
+	 * 
+	 * @param c is the base color.
+	 * @return whether to draw in black or not. (true = black, false = white)
+	 */
 	static boolean drawBlack(Color c) {
 		return drawBlack(c, 80);
 	}
 
+	/**
+	 * Method for deciding whether or not to draw a black label on top of the
+	 * specified color based on a custom average RGB value threshold.
+	 * 
+	 * @param c          is the base color.
+	 * @param threshhold is the value above which the average RGB has to be for true
+	 *                   to be returned.
+	 * @return whether to draw in black or not. (true = black, false = white)
+	 */
 	static boolean drawBlack(Color c, int threshhold) {
 		if (c.getRed() + c.getGreen() + c.getBlue() > threshhold * 3)
 			return true;
 		return false;
 	}
 
+	/**
+	 * This method traces which country a specified screenspace coordinates falls
+	 * onto based on the specified viewSettings.
+	 * 
+	 * @param x    the x coordinate
+	 * @param y    the y coordinate
+	 * @param view the viewSettings used to calculate mapspace coordinates from the
+	 *             screenspace coordinates.
+	 * @return the country in which the coordinates are contained. Should no country
+	 *         contain the specified coordinates null will be returned. Should
+	 *         multiple countries contain the coordinates only the first country
+	 *         listed in the mapdata will be returned.
+	 */
 	public static Country traceCountry(int x, int y, ViewSettings view) {
 		view = view.copy();
 
@@ -199,6 +269,12 @@ public class Map {
 		return null;
 	}
 
+	/**
+	 * This class manages loaded data of countries.
+	 * 
+	 * @author Niklas S.
+	 *
+	 */
 	public static class Country {
 
 		private final int numId;
@@ -208,7 +284,17 @@ public class Map {
 		private Color hoverColor;
 		private String tooltipText;
 		private String label;
-		
+
+		/**
+		 * Constructor for creating a Country object.
+		 * 
+		 * @param numId            is a unique identification number for each number.
+		 * @param id               is the string id that is specified in the mapdata
+		 *                         file and is the main way countries are identified.
+		 * @param drawInstructions are the draw instructions in the mapdata. These are
+		 *                         immediately parsed into a list of coordinates as draw
+		 *                         instructions of different shapes.
+		 */
 		public Country(int numId, String id, String drawInstructions) {
 			this.numId = numId;
 			this.id = id;
@@ -273,10 +359,20 @@ public class Map {
 			shapes.add(currentShape);
 		}
 
+		/**
+		 * Getter for the String id.
+		 * 
+		 * @return the string id.
+		 */
 		public String getId() {
 			return id;
 		}
 
+		/**
+		 * Compiles a list of all vertices of all shapes.
+		 * 
+		 * @return a list of all vertices regardless of which shape they are apart of.
+		 */
 		public List<double[]> dumpVertices() {
 			List<double[]> vertices = new ArrayList<>();
 
@@ -286,6 +382,12 @@ public class Map {
 			return vertices;
 		}
 
+		/**
+		 * Compiles all vertex groups into shapes in mapspace. Useful for calculating
+		 * point shape intersection.
+		 * 
+		 * @return a list of shapes of all "islands" of the country that would be drawn.
+		 */
 		public List<Shape> generateShapes() {
 			List<Shape> shapes = new ArrayList<>();
 
@@ -301,6 +403,14 @@ public class Map {
 			return shapes;
 		}
 
+		/**
+		 * Compiles all vertex groups into shapes in screenspace based on the given
+		 * viewsettings. Useful for calculating point shape intersection.
+		 * 
+		 * @param view is the ViewSettings objects used to calculate the screenspace
+		 *             coordinates.
+		 * @return a list of shapes of all "islands" of the country that would be drawn.
+		 */
 		public List<Shape> generateShapes(ViewSettings view) {
 			List<Shape> shapes = new ArrayList<>();
 
@@ -316,11 +426,22 @@ public class Map {
 			return shapes;
 		}
 
+		/**
+		 * This method adds the specified country as a neighbour to this country as well
+		 * as the other way around.
+		 * 
+		 * @param neighbourToAdd the neighbour country that is to be added to be added.
+		 */
 		public void addNeighbour(Country neighbourToAdd) {
 			adjacencyMatrix[numId][neighbourToAdd.numId] = 1;
 			adjacencyMatrix[neighbourToAdd.numId][numId] = 1;
 		}
 
+		/**
+		 * Compiles a list of all countries that are neighbours to this country.
+		 * 
+		 * @return list of all neighbouring countries.
+		 */
 		public List<Country> getNeighbours() {
 			List<Country> neighbours = new ArrayList<>();
 
@@ -331,35 +452,82 @@ public class Map {
 			return neighbours;
 		}
 
+		/**
+		 * Getter for the countries color.
+		 * 
+		 * @return the color of the country.
+		 */
 		public Color getColor() {
 			return c;
 		}
 
+		/**
+		 * Setter for the countries color.
+		 * 
+		 * @param c is the new color. Should c be null nothing will happen.
+		 */
 		public void setColor(Color c) {
 			if (c != null)
 				this.c = c;
 		}
 
+		/**
+		 * Getter for the hover color of the country.
+		 * 
+		 * @return the hover color of the country.
+		 */
 		public Color getHoverColor() {
 			return hoverColor;
 		}
 
+		/**
+		 * Setter for the hover color.
+		 * 
+		 * @param hoverColor is the new hover color. Should null be specified null will
+		 *                   be the new hover color.
+		 */
 		public void setHoverColor(Color hoverColor) {
 			this.hoverColor = hoverColor;
 		}
 
+		/**
+		 * Setter for the tooltip text, the text to be displayed in a small label
+		 * besides the mouse if the mouse is resting on this country.
+		 * 
+		 * @param tooltipText is the new tooltiptext.
+		 */
 		public void setTooltipText(String tooltipText) {
 			this.tooltipText = tooltipText;
 		}
 
+		/**
+		 * Getter for the tooltip text, the text to be displayed in a small label
+		 * besides the mouse if the mouse is resting on this country.
+		 * 
+		 * @return the current tooltip text.
+		 */
 		public String getTooltipText() {
 			return tooltipText;
 		}
 
+		/**
+		 * Getter for the label of the country, the text to be displayed permanently on
+		 * the map.
+		 * 
+		 * @param label is the new String to be set as the label. Should label be null
+		 *              or an empty String no label will be displayed.
+		 */
 		public void setLabel(String label) {
 			this.label = label;
 		}
 
+		/**
+		 * Getter for the label of the country, the text to be displayed permanently on
+		 * the map.
+		 * 
+		 * @return the label of the country. Should null have been specified as the
+		 *         label an empty String will be returned.
+		 */
 		public String getLabel() {
 			if (label == null)
 				return "";

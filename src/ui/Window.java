@@ -27,6 +27,13 @@ import javax.swing.SwingUtilities;
 import ui.Map.Country;
 import ui.controlBar.ControlLabel;
 
+/**
+ * This class handles the Window displayed on the screen hosting everything in
+ * the ui. It also handles Clicks onto the map with ClickListeners.
+ * 
+ * @author Niklas S.
+ *
+ */
 public class Window {
 
 	public static final int LEFT_LABEL = 0;
@@ -50,6 +57,14 @@ public class Window {
 
 	private int hoverOffset = 0;
 
+	/**
+	 * This constructor creates a new Window. By default it is not visible and needs
+	 * to be set visible with setVisible(true). The title of the Window is empty by
+	 * default. The controlBar is not visible by default.
+	 * <p>
+	 * The map cannot be changed. The starting view will be in the center of the
+	 * map.
+	 */
 	public Window() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -87,25 +102,81 @@ public class Window {
 		frame.setTitle("Risk");
 	}
 
+	/**
+	 * This method adds a ClickListener that will be called whenever a ClickEvent on
+	 * the Map occurs.
+	 * 
+	 * @param cl is the ClickListener to be added to the list. Should cl be null
+	 *           nothing will happen.
+	 */
 	public void addClickListener(ClickListener cl) {
 		if (cl != null)
 			clickListeners.add(cl);
 	}
 
+	/**
+	 * This method removes a ClickListener from the list of Listeners. The
+	 * listeners' method will no longer be invoked on ClickEvents on the map.
+	 * 
+	 * @param cl is the ClickListener that will be removed from the list. Should cl
+	 *           be null or not be in the list nothing will happen.
+	 */
 	public void removeClickListener(ClickListener cl) {
 		if (cl != null)
 			clickListeners.remove(cl);
 	}
 
+	/**
+	 * This method changes the title of the Window to title.
+	 * 
+	 * @param title is the new title of the Window. Should title be null nothing
+	 *              will happen. To have no title displayed, which is strongly
+	 *              discouraged, an empty String should be passed.
+	 */
 	public void setTitle(String title) {
 		if (title != null)
 			frame.setTitle(title);
 	}
-	
+
+	/**
+	 * This method sets the Window visible or invisible.
+	 * 
+	 * @param visible specifies whether or not the Window should now be visible or
+	 *                not. (true for visible, false for invisible)
+	 */
 	public void setVisible(boolean visible) {
 		frame.setVisible(visible);
 	}
 
+	/**
+	 * This method shows a new {@link FeedbackWindow} on top of this Window. The
+	 * {@link FeedbackWindow} summarizes one turn and is used to provide Feedback as
+	 * to what happened to the players.
+	 * 
+	 * @param title               is the Window title and title label of the
+	 *                            FeedbackDialog. Should title be null nothing will
+	 *                            happen.
+	 * @param attacker            is the attacker of the play. Should attacker be
+	 *                            null nothing will happen.
+	 * @param defender            is the defender of the play. Should defender be
+	 *                            null nothing will happen.
+	 * @param attackedCountry     is the country that was attacked. Should
+	 *                            attackedCountry be null nothing will happen.
+	 * @param originCountry       is the country from which the attackedCountry was
+	 *                            attacked. Should originCountry be null nothing
+	 *                            will happen.
+	 * @param diceResultsAttacker are the dice results of the attacker stored in an
+	 *                            int[]. Should diceResultsAttacker be null or not
+	 *                            contain any Integers nothing will happen.
+	 * @param diceResultsDefender are the dice results of the defender stored in an
+	 *                            int[]. Should diceResultsDefender be null or not
+	 *                            contain any Integers nothing will happen.
+	 * @param lossesAttacker      are the troops losses of the attacker.
+	 * @param lossesDefender      are the troops losses of the defender.
+	 * @param resultText          is a little summary of the play that is displayed
+	 *                            at the bottom of the Dialog. Should resultText be
+	 *                            null nothing will happen.
+	 */
 	public void showFeedbackDialog(String title, String attacker, String defender, String attackedCountry,
 			String originCountry, int[] diceResultsAttacker, int[] diceResultsDefender, int lossesAttacker,
 			int lossesDefender, String resultText) {
@@ -120,62 +191,155 @@ public class Window {
 		new FeedbackWindow(frame, title, attacker, defender, attackedCountry, originCountry, diceResultsAttacker,
 				diceResultsDefender, lossesAttacker, lossesDefender, resultText);
 	}
-	
+
+	/**
+	 * Sets the controlLabel at the specified in location in the controlBar to the
+	 * specified label.
+	 * 
+	 * @param labelLoc is the label location in the controlBar. Possible Values are
+	 *                 Window.LEFT_LABEL, Window.CETNER_LABEL, Window.RIGHT_LABEL.
+	 *                 Should none of these values be specified nothing will happen.
+	 * @param label    is the label that is to be set. Any {@link JLabel} is
+	 *                 possible to be set in the location. But the Labels in
+	 *                 controlBar are designed to be placed there. Should label be
+	 *                 null an empty JLabel will be placed in that location.
+	 */
 	public void setControlLabel(int labelLoc, JLabel label) {
 		cl.setLabel(labelLoc, label);
 	}
 
+	/**
+	 * This methods sets the controlBar to be visible or invisible. The contents of
+	 * the controlBar are kept and will be visible once the controlBar is set to be
+	 * visible again.
+	 * 
+	 * @param show is whether the controlBar should be visible or not. (true for
+	 *             visible, false for invisible)
+	 */
 	public void showControlBar(boolean show) {
 		if (show)
 			cl.setHeight(160);
 		else
 			cl.setHeight(0);
-		
+
 		SwingUtilities.updateComponentTreeUI(frame);
 	}
 
+	/**
+	 * This method sets the preference on whether or not to highlight the country
+	 * that the mouse is currently above by drawing the country with it's hover
+	 * color or the default hover color and with a black outline.
+	 * 
+	 * @param dohover specifies whether or not to highlight 'hovered' country. (true
+	 *                highlight country, false don't highlight country)
+	 */
 	public void doHover(boolean dohover) {
 		this.doHover = dohover;
 	}
 
+	/**
+	 * This method is a getter for the preference on whether or not to highlight the
+	 * hovered country.
+	 * 
+	 * @return whether the 'hovered' country is to be highlighted.
+	 */
 	public boolean doHover() {
 		return doHover;
 	}
 
+	/**
+	 * Setter for the fallback hover color. This is the color hovered countries are
+	 * highlighted with if they themselves do not specify a hover color.
+	 * 
+	 * @param fallbackHoverColor is the new fallback hover color. Should
+	 *                           fallbackHoverColor be null nothing will happen.
+	 */
 	public void setFallbackHoverColor(Color fallbackHoverColor) {
 		if (fallbackHoverColor != null)
 			this.fallbackHoverColor = fallbackHoverColor;
 	}
 
+	/**
+	 * Getter for the default hover color. This is the color that is used to
+	 * highlight countries that don't specify a hover color themselves.
+	 * 
+	 * @return the fallbackHoverColor.
+	 */
 	public Color getFallbackHoverColor() {
 		return fallbackHoverColor;
 	}
 
+	/**
+	 * Setter for whether or not to draw TooltipText for the countries.
+	 * 
+	 * @param doTooltipText specifies if the TooltipTexts are to be drawn.
+	 */
 	public void doTooltipText(boolean doTooltipText) {
 		this.doTooltipText = doTooltipText;
 		if (!doTooltipText)
 			dl.setToolTipText("");
 	}
 
+	/**
+	 * Getter for whether or not to draw TooltipTexts.
+	 * 
+	 * @return true if the TooltipTexts are to be drawn.
+	 */
 	public boolean doTooltipText() {
 		return doTooltipText;
 	}
 
+	/**
+	 * Setter for the background color of the map (i.e. the color of the ocean).
+	 * 
+	 * @param bgColor the new background color of the map. Should bgColor be null
+	 *                nothing will happen.
+	 */
 	public void setBackgroundColor(Color bgColor) {
 		if (bgColor != null)
 			this.bgColor = bgColor;
 	}
 
+	/**
+	 * Getter for the background color of the map.
+	 * 
+	 * @return the background color of the map.
+	 */
 	public Color getBackgroundColor() {
 		return bgColor;
 	}
 
+	/**
+	 * This class stores ViewSettings of the map viewport. It is meant to ease
+	 * conversion of screenspace coordinates and mapspace coordinates.
+	 * 
+	 * @author Niklas S.
+	 *
+	 */
 	public class ViewSettings {
 
+		/**
+		 * The x coordinate of the center of the viewport on the map in mapspace
+		 * coordinates.
+		 */
 		public double cx;
+		/**
+		 * The y coordinate of the center of the viewport on the map in mapspace
+		 * coordinates.
+		 */
 		public double cy;
+		/**
+		 * The zoom level of the viewport. One pixel of screenspace equates to zoom
+		 * pixels of mapspace.
+		 */
 		public double zoom; // 1 px equates to "zoom" on the map
 
+		/**
+		 * This method creates a copy of this object with fresh values to be edited
+		 * without affecting the values of this object.
+		 * 
+		 * @return a copy of this ViewSettings object with the values of this one.
+		 */
 		public ViewSettings copy() {
 			ViewSettings copy = new ViewSettings();
 
@@ -186,6 +350,18 @@ public class Window {
 			return copy;
 		}
 
+		/**
+		 * This method converts the given mapspace coordinates to screenspace
+		 * coordinates based on the current viewport settings.
+		 * 
+		 * @param x is the x coordinate of the mapspace coordinates that are to be
+		 *          converted to screenspace coordinates.
+		 * @param y is the y coordinate of the mapspace coordinates that are to be
+		 *          converted to screenspace coordinates.
+		 * @return an int[] with the coordinates in screenspace that correspond to the
+		 *         specified coordinates in mapspace. The x coordinate will be at the
+		 *         index 0 the y coordinate will be at the index 1.
+		 */
 		public int[] convertToScreenSpace(double x, double y) {
 			int[] scS = new int[2];
 
@@ -201,6 +377,18 @@ public class Window {
 			return scS;
 		}
 
+		/**
+		 * This method converts the given screenspace coordinates to mapspace
+		 * coordinates based on teh current viewport settings.
+		 * 
+		 * @param x is the x coordinate of the screenspace coordinates taht are to be
+		 *          converted to mapspace coordinates.
+		 * @param y is the y coordinate of the screenspace coordinates that are to be
+		 *          converted to mapspace coordinates.
+		 * @return a double[] with the coordinates in mapspace that correspond to the
+		 *         specified coordinates in screenspace. The x coordinate will be at the
+		 *         index 1 the y coordinate will be at the index 1.
+		 */
 		public double[] convertToMapSpace(int x, int y) {
 			double[] mS = new double[2];
 
@@ -217,6 +405,17 @@ public class Window {
 		}
 	}
 
+	/**
+	 * This class handles the transformation of the ViewSettings based on the user
+	 * panning and zooming. It also listens for clicks on the Map and traces them
+	 * back to their country.
+	 * <p>
+	 * When the Map is resized the zoom will also scale to have consistent scaling
+	 * on the x axis.
+	 * 
+	 * @author Niklas S.
+	 *
+	 */
 	private class PanMouse extends ComponentAdapter implements MouseListener, MouseMotionListener, MouseWheelListener {
 
 		int rotation = 0;
@@ -366,6 +565,13 @@ public class Window {
 		}
 	}
 
+	/**
+	 * This class is responsible for drawing the Map in its label. It extends JLabel
+	 * and only overrides it's paint(Graphics g) method.
+	 * 
+	 * @author Niklas S.
+	 *
+	 */
 	private class DrawLabel extends JLabel {
 
 		/**
