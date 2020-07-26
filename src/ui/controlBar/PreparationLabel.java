@@ -46,7 +46,7 @@ public class PreparationLabel extends JLabel {
 	 */
 	public PreparationLabel(int troops, String country) {
 		if (country == null)
-			this.country = country;
+			country = "";
 		this.troops = troops;
 		this.country = country;
 
@@ -96,6 +96,7 @@ public class PreparationLabel extends JLabel {
 		title.setText("<html><div style='text-align: center;'>" + Language.get("preparation_title") + "<br>"
 				+ Language.get("preparation_text_" + (troops == 1 || troops == -1 ? "s" : "m"), troops, country)
 				+ "</div></html>");
+		
 	}
 
 	/**
@@ -103,7 +104,7 @@ public class PreparationLabel extends JLabel {
 	 * 
 	 * @return true if the fast mode is selected false otherwise.
 	 */
-	public boolean getFastMood() {
+	public boolean getFastMode() {
 		return fastMode.isSelected();
 	}
 

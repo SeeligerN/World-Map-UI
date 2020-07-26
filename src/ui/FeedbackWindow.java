@@ -56,8 +56,7 @@ public class FeedbackWindow {
 		titleLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		action = new JLabel(
-				"<html><div style='text-align:center;'><b>" + attacker + "</b> attacked <b>" + defender
-						+ "</b><br>in <b>" + attackedCountry + "</b> from <b>" + originCountry + "</b></div></html>",
+				"<html><div style='text-align:center;'>" + Language.get("feedback_text", attacker, defender, originCountry, attackedCountry) + "</div></html>",
 				SwingConstants.CENTER);
 		action.setFont(new Font("Dialog", Font.PLAIN, 12));
 
@@ -69,9 +68,9 @@ public class FeedbackWindow {
 			diceResultsDefenderS += ", " + diceResultsDefender[i];
 
 		dice = new JLabel(
-				"<html><table>" + "<tr><td></td><td>Attacker</td><td>Defender</td></tr>"
-						+ "<tr><td>Dice results</td><td><b>" + diceResultsAttackerS + "</b></td><td><b>"
-						+ diceResultsDefenderS + "</b></td></tr>" + "<tr><td>Losses</td><td><b>" + lossesAttacker
+				"<html><table>" + "<tr><td></td><td>" + Language.get("feedback_attacker") + "</td><td>" + Language.get("feedback_defender") + "</td></tr>"
+						+ "<tr><td>" + Language.get("feedback_dice") + "</td><td><b>" + diceResultsAttackerS + "</b></td><td><b>"
+						+ diceResultsDefenderS + "</b></td></tr>" + "<tr><td>" + Language.get("feedback_losses") + "</td><td><b>" + lossesAttacker
 						+ "</b></td><td><b>" + lossesDefender + "</b></td></tr>" + "</table></html>",
 				SwingConstants.CENTER);
 		dice.setFont(new Font("Dialog", Font.PLAIN, 12));

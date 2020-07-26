@@ -99,7 +99,8 @@ public class Language {
 				String filledVal = sa[1 + preference];
 
 				for (int i = 0; i < args.length; i++)
-					filledVal = filledVal.replaceAll("\\[" + i + "\\]", args[i].toString());
+					if (args[i] != null)
+						filledVal = filledVal.replaceAll("\\[" + i + "\\]", args[i].toString());
 
 				return filledVal;
 			}
