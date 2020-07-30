@@ -47,7 +47,7 @@ public class FeedbackWindow {
 	 */
 	public FeedbackWindow(JFrame parent, String title, String attacker, String defender, String attackedCountry,
 			String originCountry, int[] diceResultsAttacker, int[] diceResultsDefender, int lossesAttacker,
-			int lossesDefender, String resultText) {
+			int lossesDefender, String resultText) { // TODO: add null checks
 		dialog = new JDialog(parent);
 
 		titleLabel = new JLabel(

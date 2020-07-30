@@ -20,7 +20,7 @@ public class Language {
 	static String[] languages;
 	static List<String[]> keyValues;
 
-	static {
+	static { // TODO: load with JSON parser
 		// load language file
 		InputStream is = Map.class.getResourceAsStream("/ui/resources/languages.txt");
 		Scanner sc = new Scanner(is);
@@ -63,7 +63,7 @@ public class Language {
 	 *             preference. Should no language preference exist that equals to
 	 *             lang the previous preference will remain.
 	 */
-	public static void setLanguagePreference(String lang) {
+	public static void setLanguagePreference(String lang) { // TODO: add null check
 		for (int i = 0; i < languages.length; i++)
 			if (languages[i].equals(lang)) {
 				preference = i;

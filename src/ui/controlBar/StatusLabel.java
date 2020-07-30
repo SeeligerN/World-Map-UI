@@ -54,7 +54,7 @@ public class StatusLabel extends JLabel {
 	 *                       bonus label. Should bonus be null the space will remain
 	 *                       empty.
 	 */
-	public StatusLabel(String[] mapModes, String reinforcements, String bonus) {
+	public StatusLabel(String[] mapModes, String reinforcements, String bonus) { // TODO: add null checks to array values
 		if (reinforcements == null)
 			reinforcements = "";
 		if (bonus == null)

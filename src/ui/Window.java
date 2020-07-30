@@ -439,7 +439,7 @@ public class Window {
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
+		public void mousePressed(MouseEvent e) { // TODO: update to remove deprecation
 			dragX = e.getX();
 			dragY = e.getY();
 
