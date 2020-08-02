@@ -61,9 +61,12 @@ public class Language {
 	 * 
 	 * @param lang is the language that will be stored as the new language
 	 *             preference. Should no language preference exist that equals to
-	 *             lang the previous preference will remain.
+	 *             lang or should lang be null the previous preference will remain.
 	 */
-	public static void setLanguagePreference(String lang) { // TODO: add null check
+	public static void setLanguagePreference(String lang) {
+		if (lang == null)
+			return;
+
 		for (int i = 0; i < languages.length; i++)
 			if (languages[i].equals(lang)) {
 				preference = i;

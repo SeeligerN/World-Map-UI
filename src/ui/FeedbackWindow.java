@@ -25,29 +25,43 @@ public class FeedbackWindow {
 	private JSeparator sep1, sep2;
 
 	/**
-	 * Constructor to create a Feedback window and show it immedeately.
+	 * Constructor to create a Feedback window and show it immediately.
 	 * 
 	 * @param parent              is the parent JFrame object above which the dialog
-	 *                            will always appear.
-	 * @param title               is the Window title on the Feedbackwindow.
+	 *                            will always appear. Should parent be null nothing
+	 *                            will happen.
+	 * @param title               is the Window title on the Feedbackwindow. Should
+	 *                            title be null nothing will happen.
 	 * @param attacker            is the String representation of the attacker.
+	 *                            Should attacker be null nothing will happen.
 	 * @param defender            is the String representation of the defender.
-	 * @param attackedCountry     is the String representation of the attacked
-	 *                            country.
+	 *                            Should defender be null nothing will happen.
+	 * @param attackedCountry     is the String representation of the attacked.
+	 *                            Should attackedCountry be null nothing will
+	 *                            happen. country.
 	 * @param originCountry       is the String representation of the country from
 	 *                            which the attacked country is being attacked.
+	 *                            Should originCountry be null nothing will happen.
 	 * @param diceResultsAttacker are the results of the dice throws of the attacker
-	 *                            in an Integer array.
+	 *                            in an Integer array. Should diceResultsAttacker be
+	 *                            null nothing will happen.
 	 * @param diceResultsDefender are the results of the dice throws of the defender
-	 *                            in an Integer array.
+	 *                            in an Integer array. Should diceResultsDefender be
+	 *                            null nothing will happen.
 	 * @param lossesAttacker      are the Troops of the Attacker lost in the battle.
 	 * @param lossesDefender      are the Troops of the defender lost in the battle.
 	 * @param resultText          is the short summary of the fight that is
-	 *                            displayed below the lower separator.
+	 *                            displayed below the lower separator. Should
+	 *                            resultText be null nothing will happen.
 	 */
 	public FeedbackWindow(JFrame parent, String title, String attacker, String defender, String attackedCountry,
 			String originCountry, int[] diceResultsAttacker, int[] diceResultsDefender, int lossesAttacker,
-			int lossesDefender, String resultText) { // TODO: add null checks
+			int lossesDefender, String resultText) {
+		if (parent == null || title == null || attacker == null || defender == null || attackedCountry == null
+				|| originCountry == null || diceResultsAttacker == null || diceResultsDefender == null
+				|| resultText == null)
+			return;
+
 		dialog = new JDialog(parent);
 
 		titleLabel = new JLabel(
@@ -55,8 +69,8 @@ public class FeedbackWindow {
 				SwingConstants.CENTER);
 		titleLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
 
-		action = new JLabel(
-				"<html><div style='text-align:center;'>" + Language.get("feedback_text", attacker, defender, originCountry, attackedCountry) + "</div></html>",
+		action = new JLabel("<html><div style='text-align:center;'>"
+				+ Language.get("feedback_text", attacker, defender, originCountry, attackedCountry) + "</div></html>",
 				SwingConstants.CENTER);
 		action.setFont(new Font("Dialog", Font.PLAIN, 12));
 
@@ -68,10 +82,11 @@ public class FeedbackWindow {
 			diceResultsDefenderS += ", " + diceResultsDefender[i];
 
 		dice = new JLabel(
-				"<html><table>" + "<tr><td></td><td>" + Language.get("feedback_attacker") + "</td><td>" + Language.get("feedback_defender") + "</td></tr>"
-						+ "<tr><td>" + Language.get("feedback_dice") + "</td><td><b>" + diceResultsAttackerS + "</b></td><td><b>"
-						+ diceResultsDefenderS + "</b></td></tr>" + "<tr><td>" + Language.get("feedback_losses") + "</td><td><b>" + lossesAttacker
-						+ "</b></td><td><b>" + lossesDefender + "</b></td></tr>" + "</table></html>",
+				"<html><table>" + "<tr><td></td><td>" + Language.get("feedback_attacker") + "</td><td>"
+						+ Language.get("feedback_defender") + "</td></tr>" + "<tr><td>" + Language.get("feedback_dice")
+						+ "</td><td><b>" + diceResultsAttackerS + "</b></td><td><b>" + diceResultsDefenderS
+						+ "</b></td></tr>" + "<tr><td>" + Language.get("feedback_losses") + "</td><td><b>"
+						+ lossesAttacker + "</b></td><td><b>" + lossesDefender + "</b></td></tr>" + "</table></html>",
 				SwingConstants.CENTER);
 		dice.setFont(new Font("Dialog", Font.PLAIN, 12));
 

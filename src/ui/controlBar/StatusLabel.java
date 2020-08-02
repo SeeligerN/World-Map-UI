@@ -12,7 +12,6 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
 import ui.Language;
-import ui.controlBar.MoveLabel.MoveLabelListener;
 
 /**
  * This class is the label that is shows status information such as the
@@ -46,7 +45,8 @@ public class StatusLabel extends JLabel {
 	 * 
 	 * @param mapModes       are all possible map modes that will be selectable by
 	 *                       the user. Should mapModes be null there will be no
-	 *                       mapModes selectable.
+	 *                       mapModes selectable. Should an element be empty or null
+	 *                       it will be omitted from the the mapModes.
 	 * @param reinforcements is the reinforcements String that is to be displayed
 	 *                       next to the reinforcements label. Should reinforcements
 	 *                       be null the space will remain empty.
@@ -54,7 +54,7 @@ public class StatusLabel extends JLabel {
 	 *                       bonus label. Should bonus be null the space will remain
 	 *                       empty.
 	 */
-	public StatusLabel(String[] mapModes, String reinforcements, String bonus) { // TODO: add null checks to array values
+	public StatusLabel(String[] mapModes, String reinforcements, String bonus) {
 		if (reinforcements == null)
 			reinforcements = "";
 		if (bonus == null)
@@ -63,7 +63,12 @@ public class StatusLabel extends JLabel {
 		this.bonus = bonus;
 
 		if (mapModes == null)
-			mapModes = new String[] { "" };
+			mapModes = new String[] {};
+
+		List<String> newMapModes = new ArrayList<>();
+		for (String s : mapModes)
+			if (s != null && !s.isEmpty())
+				newMapModes.add(s);
 
 		listeners = new ArrayList<>();
 
@@ -111,23 +116,29 @@ public class StatusLabel extends JLabel {
 	}
 
 	/**
-	 * This method updates the reinforcment String that is displayed with a new
+	 * This method updates the reinforcement String that is displayed with a new
 	 * String.
 	 * 
-	 * @param reinforcements the new reinforcements String.
+	 * @param reinforcements the new reinforcements String. Should reinforcements be
+	 *                       null the space will turn empty.
 	 */
 	public void setReinforcements(String reinforcements) {
-		this.reinforcements = reinforcements; // TODO: add missing null check
+		if (reinforcements == null)
+			reinforcements = "";
+		this.reinforcements = reinforcements;
 		updateLabel();
 	}
 
 	/**
 	 * This method updates the bonus String that is displayed with a new String.
 	 * 
-	 * @param bonus is the new bonus String.
+	 * @param bonus is the new bonus String. Should bonus be null the space will
+	 *              turn empty.
 	 */
 	public void setBonus(String bonus) {
-		this.bonus = bonus; // TODO: add missing null check
+		if (bonus == null)
+			bonus = "";
+		this.bonus = bonus;
 		updateLabel();
 	}
 

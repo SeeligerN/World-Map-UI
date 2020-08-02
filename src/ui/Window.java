@@ -439,11 +439,11 @@ public class Window {
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) { // TODO: update to remove deprecation
+		public void mousePressed(MouseEvent e) {
 			dragX = e.getX();
 			dragY = e.getY();
 
-			if (e.getModifiers() == MouseEvent.BUTTON1_MASK) {
+			if (e.getButton() == MouseEvent.BUTTON1) {
 				int x = e.getX();
 				int y = e.getY();
 
@@ -478,7 +478,7 @@ public class Window {
 			dragX = e.getX();
 			dragY = e.getY();
 
-			if (e.getModifiers() == MouseEvent.BUTTON3_MASK) {
+			if (e.getModifiersEx() == MouseEvent.BUTTON3_DOWN_MASK) {
 				view.cx -= view.zoom * (float) dx;
 				view.cy -= view.zoom * (float) dy;
 
